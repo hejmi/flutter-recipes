@@ -41,11 +41,11 @@ class _RecipesListState extends State<RecipesList> {
               itemCount: _recipesList.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  tileColor: Color(0x00999999),
-                  hoverColor: Color(0x99990000),
+                  tileColor: Color(0x00795548),
+                  hoverColor: Color(0x99795548),
                   minVerticalPadding: 10,
-                  title: Text(_recipesList[index].title),
-                  subtitle: Text(_recipesList[index].description),
+                  title: Text(_recipesList[index].title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, fontFamily: "UniSans")),
+                  subtitle: Text(_recipesList[index].description, style: TextStyle(fontSize: 14, fontFamily: "Raleway", fontWeight: FontWeight.w400)),
                   trailing: Container(
                     width: 45,
                     height: 25,

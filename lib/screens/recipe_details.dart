@@ -1,4 +1,7 @@
+import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_recipes/model/recipe.dart';
 import 'package:flutter/material.dart';
 
@@ -23,21 +26,24 @@ class _RecipeDetailsState extends State<RecipeDetails> {
         title: Text('Details'),
       ),
       body: Container(
-        height: 270.0,
         padding: const EdgeInsets.all(35),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              "Title : ${widget.recipe.title}",
-              style: TextStyle(fontSize: 20),
-            ),
+            Image.asset("assets/images/${widget.recipe.id}.jpg"),
             Padding(
               padding: EdgeInsets.all(10),
             ),
             Text(
-              "Description : ${widget.recipe.description}",
-              style: TextStyle(fontSize: 20),
+              widget.recipe.title,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "UniSans"),
+            ),
+            Padding(
+              padding: EdgeInsets.all(5),
+            ),
+            Text(
+              widget.recipe.description,
+              style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400),
             ),
           ],
         ),
