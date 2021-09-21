@@ -46,7 +46,15 @@ class _CharacterListState extends State<CharacterList> {
                   minVerticalPadding: 10,
                   title: Text(_characterList[index].title),
                   subtitle: Text(_characterList[index].description),
-                  trailing: Text(_characterList[index].cookingtime.toString() + " min."),
+                  trailing: Container(
+                    width: 45,
+                    height: 25,
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.timer_sharp, size: 17, ),
+                        Expanded(child: Text(_characterList[index].cookingtime.toString() + " min.",style: TextStyle(fontSize: 12))) ,
+                    ])),
                   leading: CircleAvatar(
                     backgroundImage: AssetImage("assets/images/" +
                         _characterList[index].id.toString() +
