@@ -9,8 +9,8 @@ class Character {
       : id = json['id'],
         title = json['title'],
         description = json['description'],
-        cookingtime = json['cookingTime'],
-        preptime = json['prepTime'];
+        cookingtime = json['cooking_time'],
+        preptime = json['prep_time'];
 
   Map toJson() {
     return {'id': id, 'title': title, 'description': description, 'cookingtime': cookingtime, 'preptime': preptime};

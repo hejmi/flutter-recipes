@@ -18,7 +18,8 @@ class _CharacterListState extends State<CharacterList> {
     CharacterApi.getCharacters().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        _characterList = list.map((model) => Character.fromJson(model)).toList();
+        _characterList =
+            list.map((model) => Character.fromJson(model)).toList();
       });
     });
   }
@@ -33,15 +34,25 @@ class _CharacterListState extends State<CharacterList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Breaking Bad Characters"),
+          title: Text("The Flutter Recipes"),
         ),
         body: Container(
           child: ListView.builder(
               itemCount: _characterList.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  tileColor: Color(0x00999999),
+                  hoverColor: Color(0x99990000),
+                  minVerticalPadding: 10,
                   title: Text(_characterList[index].title),
                   subtitle: Text(_characterList[index].description),
+                  trailing: Text(_characterList[index].cookingtime.toString() + " min."),
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage("assets/images/" +
+                        _characterList[index].id.toString() +
+                        ".jpg"),
+                    radius: 30,
+                  ),
                 );
               }),
         ));
