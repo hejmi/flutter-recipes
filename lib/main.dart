@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "The Flutter Recipes",
       theme: ThemeData(primarySwatch: Colors.red),
-      home: CharacterList(),
+      home: RecipesList(),
     );
   }
 }

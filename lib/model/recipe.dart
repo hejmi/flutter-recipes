@@ -1,11 +1,11 @@
-class Character {
+class Recipe {
   int id;
   String title;
   String description;
   int cookingtime;
   int preptime;
 
-  Character.fromJson(Map json)
+  Recipe.fromJson(Map json)
       : id = json['id'],
         title = json['title'],
         description = json['description'],
