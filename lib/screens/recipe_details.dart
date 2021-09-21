@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:neumorphic_container/neumorphic_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_recipes/model/recipe.dart';
@@ -44,6 +44,19 @@ class _RecipeDetailsState extends State<RecipeDetails> {
             Text(
               widget.recipe.description,
               style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+              child: NeumorphicContainer(
+                height: 40,
+                width: 40,
+                borderRadius: 40,
+                spread: 2,
+                primaryColor: Color(0xfff0f0f0),
+                //flat neumorphism design
+                curvature: Curvature.concave,
+                child: Icon(Icons.favorite_outline, color: Colors.red, size: 23)
+              ),
             ),
           ],
         ),
