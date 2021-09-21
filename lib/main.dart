@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "The Flutter Recipes",
-      theme: ThemeData(primarySwatch: Colors.red),
+      theme: ThemeData(primarySwatch: Colors.brown),
       home: RecipesList(),
     );
   }

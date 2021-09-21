@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter_recipes/data/recipes_api.dart';
 import 'package:flutter_recipes/model/recipe.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_recipes/screens/recipe_details.dart';
 
 class RecipesList extends StatefulWidget {
   RecipesList({Key key}) : super(key: key);
@@ -61,6 +61,12 @@ class _RecipesListState extends State<RecipesList> {
                         ".jpg"),
                     radius: 30,
                   ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RecipeDetails(recipe: _recipesList[index])),
+                    );
+                  },
                 );
               }),
         ));
