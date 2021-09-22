@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:ui';
-import 'package:neumorphic_container/neumorphic_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_recipes/model/recipe.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_recipes/data/recipes_api.dart';
+import 'package:flutter_recipes/model/ingredients.dart';
 
 class RecipeDetails extends StatefulWidget {
   final Recipe recipe;
@@ -15,9 +17,21 @@ class RecipeDetails extends StatefulWidget {
 
 class _RecipeDetailsState extends State<RecipeDetails> {
 
+  List<Ingredients> _ingredientsList = [];
+
+  void getIngredientsForRecipeId(int id) async {
+    RecipeApi.getIngredientsFromId(id).then((response) {
+      setState(() {
+        Iterable list = json.decode(response.body);
+        _ingredientsList =
+            list.map((model) => Ingredients.fromJson(model)).toList();
+      });
+    });
+  }
   @override
   void initState() {
     super.initState();
+    getIngredientsForRecipeId(widget.recipe.id);
   }
   @override
   Widget build(BuildContext context) {
@@ -66,16 +80,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-                    child: NeumorphicContainer(
-                      height: 40,
-                      width: 40,
-                      borderRadius: 40,
-                      spread: 2,
-                      primaryColor: Color(0xfff0f0f0),
-                      //flat neumorphism design
-                      curvature: Curvature.concave,
-                      child: Icon(Icons.favorite_outline, color: Colors.red, size: 23)
-                  ),
+                    child:  Icon(Icons.favorite_outline, color: Colors.red, size: 23),
                   ),
                   ],
                   ),
@@ -92,9 +97,17 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                   Padding(
                     padding: EdgeInsets.all(5),
                   ),
-                  Text(
-                    widget.recipe.description,
-                    style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400),
+                  Expanded(
+                  child: new ListView.builder(
+                    itemCount: _ingredientsList.length,
+                    itemBuilder: (context, index) {
+                      return ListBody(
+                        children: [
+                          _ingredientsList[index].measure == null ? Text(_ingredientsList[index].ingredient,  style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400)) : Text("${_ingredientsList[index].measure} ${_ingredientsList[index].ingredient}", style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400),)
+                        ],
+                      );
+                      }
+                  ),
                   ),
                 ],
               ),
@@ -104,33 +117,12 @@ class _RecipeDetailsState extends State<RecipeDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Image.asset("assets/images/${widget.recipe.id}.jpg"),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                  ),
                   Text(
-                    widget.recipe.title,
+                    "Step by step",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "UniSans"),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
-                  ),
-                  Text(
-                    widget.recipe.description,
-                    style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-                    child: NeumorphicContainer(
-                        height: 40,
-                        width: 40,
-                        borderRadius: 40,
-                        spread: 2,
-                        primaryColor: Color(0xfff0f0f0),
-                        //flat neumorphism design
-                        curvature: Curvature.concave,
-                        child: Icon(Icons.favorite_outline, color: Colors.red, size: 23)
-                    ),
                   ),
                 ],
               ),
