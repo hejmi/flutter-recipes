@@ -18,8 +18,7 @@ class _RecipesListState extends State<RecipesList> {
     RecipeApi.getRecipes().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        _recipesList =
-            list.map((model) => Recipe.fromJson(model)).toList();
+        _recipesList = list.map((model) => Recipe.fromJson(model)).toList();
       });
     });
   }
@@ -44,17 +43,31 @@ class _RecipesListState extends State<RecipesList> {
                   tileColor: Color(0x00795548),
                   hoverColor: Color(0x99795548),
                   minVerticalPadding: 10,
-                  title: Text(_recipesList[index].title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, fontFamily: "UniSans")),
-                  subtitle: Text(_recipesList[index].description, style: TextStyle(fontSize: 14, fontFamily: "Raleway", fontWeight: FontWeight.w400)),
+                  title: Text(_recipesList[index].title,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "UniSans")),
+                  subtitle: Text(_recipesList[index].description,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: "Raleway",
+                          fontWeight: FontWeight.w400)),
                   trailing: Container(
-                    width: 45,
-                    height: 25,
-                    alignment: Alignment.centerRight,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.timer_sharp, size: 17, ),
-                        Expanded(child: Text(_recipesList[index].cookingtime.toString() + " min.",style: TextStyle(fontSize: 12))) ,
-                    ])),
+                      width: 45,
+                      height: 25,
+                      alignment: Alignment.centerRight,
+                      child: Row(children: <Widget>[
+                        Icon(
+                          Icons.timer_sharp,
+                          size: 17,
+                        ),
+                        Expanded(
+                            child: Text(
+                                _recipesList[index].cookingtime.toString() +
+                                    " min.",
+                                style: TextStyle(fontSize: 12))),
+                      ])),
                   leading: CircleAvatar(
                     backgroundImage: AssetImage("assets/images/" +
                         _recipesList[index].id.toString() +
@@ -64,7 +77,9 @@ class _RecipesListState extends State<RecipesList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RecipeDetails(recipe: _recipesList[index])),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              RecipeDetails(recipe: _recipesList[index])),
                     );
                   },
                 );

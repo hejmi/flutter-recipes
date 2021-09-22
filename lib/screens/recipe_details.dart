@@ -9,6 +9,7 @@ import 'package:flutter_recipes/model/ingredients.dart';
 
 class RecipeDetails extends StatefulWidget {
   final Recipe recipe;
+
   RecipeDetails({this.recipe});
 
   @override
@@ -16,7 +17,6 @@ class RecipeDetails extends StatefulWidget {
 }
 
 class _RecipeDetailsState extends State<RecipeDetails> {
-
   List<Ingredients> _ingredientsList = [];
 
   void getIngredientsForRecipeId(int id) async {
@@ -28,36 +28,38 @@ class _RecipeDetailsState extends State<RecipeDetails> {
       });
     });
   }
+
   @override
   void initState() {
     super.initState();
     getIngredientsForRecipeId(widget.recipe.id);
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        initialIndex: 0,
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            title: Text(widget.recipe.title),
-            bottom: const TabBar(
-              tabs: <Widget>[
-                Tab(
-                  icon: Text('Recipe Details'),
-                ),
-                Tab(
-                  icon: Text('Ingredients'),
-                ),
-                Tab(
-                  icon: Text('Steps'),
-                ),
-              ],
-            ),
+      initialIndex: 0,
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          title: Text(widget.recipe.title),
+          bottom: const TabBar(
+            tabs: <Widget>[
+              Tab(
+                icon: Text('Recipe Details'),
+              ),
+              Tab(
+                icon: Text('Ingredients'),
+              ),
+              Tab(
+                icon: Text('Steps'),
+              ),
+            ],
           ),
-        body: TabBarView (
-          children: <Widget> [
+        ),
+        body: TabBarView(
+          children: <Widget>[
             Container(
               padding: const EdgeInsets.all(35),
               child: Column(
@@ -69,22 +71,30 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                   ),
                   Text(
                     widget.recipe.title,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "UniSans"),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "UniSans"),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
                   ),
                   Text(
                     widget.recipe.description,
-                    style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontFamily: "Raleway",
+                        fontWeight: FontWeight.w400),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-                    child:  Icon(Icons.favorite_outline, color: Colors.red, size: 23),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+                    child: Icon(Icons.favorite_outline,
+                        color: Colors.red, size: 23),
                   ),
-                  ],
-                  ),
-                ),
+                ],
+              ),
+            ),
             Container(
               padding: const EdgeInsets.all(35),
               child: Column(
@@ -92,22 +102,36 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                 children: <Widget>[
                   Text(
                     "ingredients you need",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "UniSans"),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "UniSans"),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
                   ),
                   Expanded(
-                  child: new ListView.builder(
-                    itemCount: _ingredientsList.length,
-                    itemBuilder: (context, index) {
-                      return ListBody(
-                        children: [
-                          _ingredientsList[index].measure == null ? Text(_ingredientsList[index].ingredient,  style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400)) : Text("${_ingredientsList[index].measure} ${_ingredientsList[index].ingredient}", style: TextStyle(fontSize: 17, fontFamily: "Raleway", fontWeight: FontWeight.w400),)
-                        ],
-                      );
-                      }
-                  ),
+                    child: new ListView.builder(
+                        itemCount: _ingredientsList.length,
+                        itemBuilder: (context, index) {
+                          return ListBody(
+                            children: [
+                              _ingredientsList[index].measure == null
+                                  ? Text(_ingredientsList[index].ingredient,
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontFamily: "Raleway",
+                                          fontWeight: FontWeight.w400))
+                                  : Text(
+                                      "${_ingredientsList[index].measure} ${_ingredientsList[index].ingredient}",
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontFamily: "Raleway",
+                                          fontWeight: FontWeight.w400),
+                                    )
+                            ],
+                          );
+                        }),
                   ),
                 ],
               ),
@@ -119,7 +143,10 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                 children: <Widget>[
                   Text(
                     "Step by step",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "UniSans"),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "UniSans"),
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
@@ -127,9 +154,9 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                 ],
               ),
             ),
-                ],
-                ),
-                ),
-              );
-            }
+          ],
+        ),
+      ),
+    );
+  }
 }
