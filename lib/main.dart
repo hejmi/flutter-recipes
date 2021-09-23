@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "The Flutter Recipes",
+      title: "The Recipe Cave",
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: RecipesList(),
     );

@@ -57,18 +57,26 @@ class _RecipeDetailsState extends State<RecipeDetails> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           title: Text(widget.recipe.title),
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(
-                icon: Icon(FlutterIcons.info_faw5s, size: 15,),
+                icon: Icon(
+                  FlutterIcons.info_faw5s,
+                  size: 15,
+                ),
               ),
               Tab(
-                icon: Icon(FlutterIcons.file_signature_faw5s, size: 15,),
+                icon: Icon(
+                  FlutterIcons.file_signature_faw5s,
+                  size: 15,
+                ),
               ),
               Tab(
-                icon: Icon(FlutterIcons.blender_faw5s, size:15,),
+                icon: Icon(
+                  FlutterIcons.blender_faw5s,
+                  size: 15,
+                ),
               ),
             ],
           ),
@@ -113,7 +121,10 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                           shape: CircleBorder(),
                         ),
                         child: IconButton(
-                          icon: const Icon(Icons.favorite_border_rounded, size: 15,),
+                          icon: const Icon(
+                            Icons.favorite_border_rounded,
+                            size: 15,
+                          ),
                           color: Colors.white,
                           onPressed: () {},
                         ),
@@ -209,7 +220,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                             children: <Widget>[
                               Expanded(
                                 child: Text(
-                                  "${_stepsList[index].step}. ${_stepsList[index].description} \n\n",
+                                  "${_stepsList[index].step}. ${_stepsList[index].description} \n",
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: "Raleway",

@@ -33,7 +33,7 @@ class _RecipesListState extends State<RecipesList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("The Flutter Recipes"),
+          title: Text("The Recipe Cave"),
         ),
         body: Container(
           child: ListView.builder(
