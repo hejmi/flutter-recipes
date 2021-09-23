@@ -6,6 +6,7 @@ import 'package:flutter_recipes/model/recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_recipes/data/recipes_api.dart';
 import 'package:flutter_recipes/model/ingredients.dart';
+import 'package:flutter_recipes/model/steps.dart';
 
 class RecipeDetails extends StatefulWidget {
   final Recipe recipe;
@@ -18,6 +19,7 @@ class RecipeDetails extends StatefulWidget {
 
 class _RecipeDetailsState extends State<RecipeDetails> {
   List<Ingredients> _ingredientsList = [];
+  List<Steps> _stepsList = [];
 
   void getIngredientsForRecipeId(int id) async {
     RecipeApi.getIngredientsFromId(id).then((response) {
@@ -29,16 +31,26 @@ class _RecipeDetailsState extends State<RecipeDetails> {
     });
   }
 
+  void getStepsForRecipeId(int id) async {
+    RecipeApi.getStepsFromId(id).then((response) {
+      setState(() {
+        Iterable list = json.decode(response.body);
+        _stepsList = list.map((model) => Steps.fromJson(model)).toList();
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     getIngredientsForRecipeId(widget.recipe.id);
+    getStepsForRecipeId(widget.recipe.id);
   }
 
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 14));
     return DefaultTabController(
       initialIndex: 0,
       length: 3,
@@ -91,8 +103,21 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-                    child: Icon(Icons.favorite_outline,
-                        color: Colors.red, size: 23),
+                  ),
+                  Material(
+                    child: Center(
+                      child: Ink(
+                        decoration: const ShapeDecoration(
+                          color: Colors.redAccent,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.favorite_border_rounded),
+                          color: Colors.white,
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -123,14 +148,14 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                 child: _ingredientsList[index].measure == null
                                     ? Text("",
                                         style: TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 14,
                                           fontFamily: "Raleway",
                                           fontWeight: FontWeight.w400,
                                         ))
                                     : Text(
                                         _ingredientsList[index].measure,
                                         style: TextStyle(
-                                            fontSize: 13,
+                                            fontSize: 14,
                                             fontFamily: "Raleway",
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -142,7 +167,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                 flex: 75,
                                 child: Text(_ingredientsList[index].ingredient,
                                     style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 14,
                                         fontFamily: "Raleway",
                                         fontWeight: FontWeight.w400)),
                               ),
@@ -154,7 +179,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                     child: ElevatedButton(
                       style: style,
                       onPressed: () {},
-                      child: const Text('Add all to shopping list'),
+                      child: const Text('Add all ingredients to shopping list'),
                     ),
                   ),
                 ],
@@ -174,6 +199,25 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                   ),
                   Padding(
                     padding: EdgeInsets.all(5),
+                  ),
+                  Expanded(
+                    child: new ListView.builder(
+                        itemCount: _stepsList.length,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  "${_stepsList[index].step}. ${_stepsList[index].description} \n\n",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Raleway",
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
                   ),
                 ],
               ),
