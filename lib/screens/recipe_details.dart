@@ -37,6 +37,8 @@ class _RecipeDetailsState extends State<RecipeDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle style =
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
     return DefaultTabController(
       initialIndex: 0,
       length: 3,
@@ -114,24 +116,46 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                     child: new ListView.builder(
                         itemCount: _ingredientsList.length,
                         itemBuilder: (context, index) {
-                          return ListBody(
-                            children: [
-                              _ingredientsList[index].measure == null
-                                  ? Text(_ingredientsList[index].ingredient,
-                                      style: TextStyle(
-                                          fontSize: 17,
+                          return Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 25,
+                                child: _ingredientsList[index].measure == null
+                                    ? Text("",
+                                        style: TextStyle(
+                                          fontSize: 13,
                                           fontFamily: "Raleway",
-                                          fontWeight: FontWeight.w400))
-                                  : Text(
-                                      "${_ingredientsList[index].measure} ${_ingredientsList[index].ingredient}",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontFamily: "Raleway",
-                                          fontWeight: FontWeight.w400),
-                                    )
+                                          fontWeight: FontWeight.w400,
+                                        ))
+                                    : Text(
+                                        _ingredientsList[index].measure,
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontFamily: "Raleway",
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(5),
+                              ),
+                              Expanded(
+                                flex: 75,
+                                child: Text(_ingredientsList[index].ingredient,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontFamily: "Raleway",
+                                        fontWeight: FontWeight.w400)),
+                              ),
                             ],
                           );
                         }),
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      style: style,
+                      onPressed: () {},
+                      child: const Text('Add all to shopping list'),
+                    ),
                   ),
                 ],
               ),
