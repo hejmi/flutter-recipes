@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_recipes/model/recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_recipes/data/recipes_api.dart';
@@ -61,13 +62,13 @@ class _RecipeDetailsState extends State<RecipeDetails> {
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(
-                icon: Text('Recipe Details'),
+                icon: Icon(FlutterIcons.info_faw5s, size: 15,),
               ),
               Tab(
-                icon: Text('Ingredients'),
+                icon: Icon(FlutterIcons.file_signature_faw5s, size: 15,),
               ),
               Tab(
-                icon: Text('Steps'),
+                icon: Icon(FlutterIcons.blender_faw5s, size:15,),
               ),
             ],
           ),
@@ -108,11 +109,11 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                     child: Center(
                       child: Ink(
                         decoration: const ShapeDecoration(
-                          color: Colors.redAccent,
+                          color: Colors.blueGrey,
                           shape: CircleBorder(),
                         ),
                         child: IconButton(
-                          icon: const Icon(Icons.favorite_border_rounded),
+                          icon: const Icon(Icons.favorite_border_rounded, size: 15,),
                           color: Colors.white,
                           onPressed: () {},
                         ),
